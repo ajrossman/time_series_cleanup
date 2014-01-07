@@ -17,11 +17,14 @@ Jeweler::Tasks.new do |gem|
   gem.name = "timeseriesdata"
   gem.homepage = "http://github.com/ajrossman/timeseriesdata"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{utilities to cleanup time-series data sets}
+  gem.description = %Q{utilities to cleanup time-series data sets}
   gem.email = "aj@smartresourceinstitute.com"
   gem.authors = ["ajrossman"]
-  # dependencies defined in Gemfile
+  gem.add_development_dependendency "rspec"
+  gem.add_development_dependendency "redis"
+  gem.add_development_dependendency "pry"
+  gem.add_development_dependendency "csv"
 end
 Jeweler::RubygemsDotOrgTasks.new
 
