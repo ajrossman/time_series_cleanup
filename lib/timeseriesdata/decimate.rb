@@ -2,8 +2,8 @@ require 'csv'
 require 'date'
 require 'redis'
 
-module timeseriesdata
-  module decimate
+module Timeseriesdata
+  module Decimate
     def self.to_fifteen_minute_intervals(site_directory, datafile_directory, filename, processed_subdirectory_name, *points)
 
 	  # Convert data into regularly spaced interval data.  Timestamps are analyzed to determine

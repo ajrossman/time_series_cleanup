@@ -2,10 +2,10 @@ require 'csv'
 require 'pry'
 require 'date'
 
-module timeseriesdata
+module Timeseriesdata
 
   # Generates daily averages from irregular courser grained data in csv files and outputs as hash of arrays  
-  module daily_average
+  module DailyAverage
 
   	def self.format_csv_into_matrix_with_start_end_difference_rows(datafile_directory, filename)
       matrix_with_start_end_difference_rows = []
