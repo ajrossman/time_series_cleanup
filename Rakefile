@@ -21,10 +21,6 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{utilities to cleanup time-series data sets}
   gem.email = "aj@smartresourceinstitute.com"
   gem.authors = ["ajrossman"]
-  gem.add_development_dependendency "rspec"
-  gem.add_development_dependendency "redis"
-  gem.add_development_dependendency "pry"
-  gem.add_development_dependendency "csv"
 end
 Jeweler::RubygemsDotOrgTasks.new
 
