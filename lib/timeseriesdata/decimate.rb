@@ -5,7 +5,7 @@ require 'redis'
 module Timeseriesdata
   module Decimate
     def self.to_fifteen_minute_intervals(site_directory, datafile_directory, filename, processed_subdirectory_name, *points)
-
+      puts 'entered Timeseries::Decimate'
 	  # Convert data into regularly spaced interval data.  Timestamps are analyzed to determine
 	  #  which 15 minute interval they belong to (1:00:01 to 1:15:00 are all included in 1:15:00 interval). 
 	  #  The data are process by grouping all data into 15 minute intervals and then calculating average, 
@@ -22,6 +22,7 @@ module Timeseriesdata
 	  #  Yes/True = 1, No/False = 0
 
 	  # TODO add intervals with no data to make complete data sets 
+$redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 
 	  minute_interval = 15  # This is the number of minutes in each interval
 	  timestamp_column = 0  # This is the column with timestamp data
@@ -37,10 +38,10 @@ module Timeseriesdata
 	  processed_data = Array.new
 
       filename_with_location = Rails.root.join("public/site_data/",site_directory,datafile_directory,filename)
-	  puts filename
-
+	  puts filename_with_location
 	  # parse file line by line
 	  CSV.foreach("#{filename_with_location}", headers: true) do |row|
+	  	puts "in #{filename_with_location}"
 	    timestamp = DateTime.strptime(row[0]+row[1], '%Y/%m/%d %H:%M:%S')
 	    es = timestamp.to_time.to_i - 60  # subtract 1 minute so :15 is in :15 interval and not :30
 
@@ -83,7 +84,7 @@ module Timeseriesdata
 
 
 	  # Write data from Redis to file
-	  CSV.open("#{processed_subdirectory_name}/#{File.basename(filename,'.csv')}_15.csv",'wb') do |csv|
+	  csv.open("#{processed_subdirectory_name}/#{File.basename(filename,'.csv')}_15.csv",'wb') do |csv|
 	    # headers
 	    header[0] = 'timestamp'
 	    points.flatten.each do |point|

@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "timeseriesdata"
   gem.homepage = "http://github.com/ajrossman/timeseriesdata"
-  gem.license = "MIT"
+  gem.license = "All rights reserved by Smart Resource Institute"
   gem.summary = %Q{utilities to cleanup time-series data sets}
   gem.description = %Q{utilities to cleanup time-series data sets}
   gem.email = "aj@smartresourceinstitute.com"
