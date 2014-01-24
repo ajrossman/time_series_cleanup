@@ -48,8 +48,7 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 	  	
 	    #timestamp = DateTime.strptime(row[0]+row[1], '%Y/%m/%d %H:%M:%S').in_time_zone('Eastern Time (US & Canada)')
 	    timestamp = Time.zone.parse("#{row[0]} #{row[1]}")
-	    puts "#{timestamp} in #{timestamp.zone} and default is #{Time.zone}"
-
+	    
 	    es = timestamp.to_time.to_i - 60  # subtract 1 minute so :15 is in :15 interval and not :30
 
 	    # determine 15 minute interval 
