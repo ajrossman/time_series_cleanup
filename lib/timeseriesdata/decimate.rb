@@ -98,7 +98,7 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 	    # loop for each key for all measurements
 	    es_intervals_array.each do |es_interval|
 	      processed_data = []
-	      interval = Time.at(es_interval.to_i * minute_interval * 60).getlocal("+00:00").to_datetime
+	      interval = Time.at(es_interval.to_i * minute_interval * 60).getlocal.to_datetime
 	      processed_data[0] = interval
 	      points.flatten.each do |point|
 	        arr = redis_sorter.LRANGE("#{es_interval}:#{point.keys.first}",0,-1)
