@@ -38,16 +38,19 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 	  processed_data = Array.new
 
       filename_with_location = Rails.root.join("public/site_data/",site_directory,datafile_directory,filename)
-	  puts filename_with_location
-	  # parse file line by line
+	  
+      puts "Decimating data in #{filename_with_location}"
+	  
+	   # parse file line by line
 	  CSV.foreach("#{filename_with_location}", headers: true) do |row|
-	  	puts "Decimating data in #{filename_with_location}"
-	    timestamp = DateTime.strptime(row[0]+row[1], '%Y/%m/%d %H:%M:%S')
+	  	
+	    timestamp = DateTime.strptime(row[0]+row[1], '%Y/%m/%d %H:%M:%S').in_time_zone('Eastern Time (US & Canada)')
+	    puts timestamp
 	    es = timestamp.to_time.to_i - 60  # subtract 1 minute so :15 is in :15 interval and not :30
 
 	    # determine 15 minute interval 
 	    es_interval = es / (minute_interval * 60) + 1
-	    interval = Time.at(es_interval * minute_interval * 60).local_time.to_datetime
+	    interval = Time.at(es_interval * minute_interval * 60).to_datetime
 
 	    points.flatten.each do |point|
           point_name = point.keys.first
