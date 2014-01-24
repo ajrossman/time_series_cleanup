@@ -47,7 +47,7 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 
 	    # determine 15 minute interval 
 	    es_interval = es / (minute_interval * 60) + 1
-	    interval = Time.at(es_interval * minute_interval * 60).to_datetime
+	    interval = Time.at(es_interval * minute_interval * 60).local_time.to_datetime
 
 	    points.flatten.each do |point|
           point_name = point.keys.first
