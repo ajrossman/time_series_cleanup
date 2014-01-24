@@ -41,7 +41,7 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 	  puts filename_with_location
 	  # parse file line by line
 	  CSV.foreach("#{filename_with_location}", headers: true) do |row|
-	  	puts "in #{filename_with_location}"
+	  	puts "Decimating data in #{filename_with_location}"
 	    timestamp = DateTime.strptime(row[0]+row[1], '%Y/%m/%d %H:%M:%S')
 	    es = timestamp.to_time.to_i - 60  # subtract 1 minute so :15 is in :15 interval and not :30
 
@@ -79,12 +79,8 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
       # Make new directory for processed data
       Dir.chdir(Rails.root.join("public/site_data/#{site_directory}/#{datafile_directory}"))
 
-      %x{pwd}
-      %x{mkdir #{processed_subdirectory_name}}
-
-
 	  # Write data from Redis to file
-	  csv.open("#{processed_subdirectory_name}/#{File.basename(filename,'.csv')}_15.csv",'wb') do |csv|
+	  CSV.open("#{processed_subdirectory_name}/#{File.basename(filename,'.csv')}_15.csv",'wb') do |csv|
 	    # headers
 	    header[0] = 'timestamp'
 	    points.flatten.each do |point|
