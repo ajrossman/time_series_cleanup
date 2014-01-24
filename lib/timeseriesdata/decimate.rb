@@ -37,6 +37,8 @@ $redis = Redis.new(:host => 'localhost', :port => 6379, :db => 2)
 	  header = Array.new
 	  processed_data = Array.new
 
+	  Time.zone = ("America/New_York")
+
       filename_with_location = Rails.root.join("public/site_data/",site_directory,datafile_directory,filename)
 	  
       puts "Decimating data in #{filename_with_location}"
