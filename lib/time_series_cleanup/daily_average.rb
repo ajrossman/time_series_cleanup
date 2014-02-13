@@ -2,7 +2,7 @@ require 'csv'
 require 'pry'
 require 'date'
 
-module Timeseriesdata
+module TimeSeriesCleanup
 
   # Generates daily averages from irregular courser grained data in csv files and outputs as hash of arrays  
   module DailyAverage
